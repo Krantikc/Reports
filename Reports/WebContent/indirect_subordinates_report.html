@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Reports</title>
+
+  <!----------------- Stylesheets ----------------->
+    
+  <!-- Vendor Stylesheets  -->
+  <link rel="stylesheet" href="css/jquery-ui.css" ></link>
+  
+  <!-- Application Stylesheets  -->
+  <link rel="stylesheet" href="css/style.css" ></link>
+
+  <!----------------- Scripts ----------------->
+  
+  <!-- Vendor Scripts  -->
+  <script src="js/libs/jquery-1.11.2.min.js"></script>
+  <script src="js/libs/jquery-ui.js"></script>
+  <script src="js/libs/date.js"></script>
+  
+  <!-- Highcharts Plugin Scripts  -->
+  <script src="js/libs/highcharts.js"></script>
+  <script src="js/plugins/highcharts-xrange.js"></script> <!-- For timeline chart -->
+  
+  <!-- Reports Plugin -->
+  <script src="js/Reports.js"></script>
+  
+ <!-- Application Scripts  -->
+ <script src="config.js"></script>
+ <script src="indirect_subordinates_report.js"></script>
+  
+  <script type="text/javascript">
+    $(function(){
+        $("#bottom-nav").load("header.html"); 
+     });
+  </script>
+</head>
+<body>
+<header>
+	<div id="top-nav">
+		<div id="logo"></div><div id="title">Attendance</div><div id="logout">Logout</div>
+	</div>
+</header>
+<div class="container attendance-reports">
+	<div id="bottom-nav">
+	</div>
+	<div id="loading-mask">Loading..</div>
+	<div class="side-menu">
+	</div>
+	<div id="page-title">
+		Subordinates Report
+	</div>
+	<div class="contents">
+		<div class="options">
+			<button id="submit-btn" >Submit</button>
+		</div>
+	    <div id="reportForm">
+			<div class="form-field"><div class="label">Employee ID </div><div class="input-div"><input title="Employee ID"  type="text" placeholder="Emp ID" id="userId"/></div></div>
+			<div class="form-field"><div class="label">Employee Name </div><div class="input-div"><input title="Employee Name" type="text" placeholder="Emp Name" id="username"/></div></div>
+
+			<div class="form-field">
+			<div class="label date">Date </div>
+				<div>
+					<div class="arrow back">
+						<img alt="" src="image/arrow.png" onclick="cApplication.mPrevDate()" title="Previous Day" class="icon" />
+					</div>
+					<input title="Date" placeholder="Date (dd MMM, yy)" type="text" id="date" required disabled="disabled"/>
+					<div class="calendar-div">
+						<img src="image/calendar.png" onclick="cApplication.mShowCalendar('date')" class="icon" id="date-icon" />
+					</div>
+					<div class="arrow next">
+						<img alt="" src="image/arrow.png" onclick="cApplication.mNextDate()" title="Next Day" class="icon"/>
+					</div>
+				</div>
+			</div>
+			<div><input type="checkbox" id="direct-subordinates"/><label>Indirect Subordinates</label></div>
+		</div>
+		<div class="no-data">No data to display</div>
+		<div id="reports-data">
+			<div class="attendance-charts">
+				<div class="combo-charts" >
+					<!-- Stacked Charts -->
+					<div class="combo-charts monthly-combo-charts" id="charts-div" >
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+</body>
+</html>

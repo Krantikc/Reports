@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Reports</title>
+
+  <!----------------- Stylesheets ----------------->
+    
+  <!-- Vendor Stylesheets  -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+  <link href="css/bootstrap-table.min.css" rel="stylesheet" media="screen"/>
+  <!-- <link rel="stylesheet" href="https://rawgit.com/akottr/dragtable/master/dragtable.css"> -->
+  
+  <link rel="stylesheet" href="css/jquery-ui.css" ></link>
+  <link rel="stylesheet" href="css/custom-combobox.css"> 
+  
+  <link rel="stylesheet" id="themeCSS" href="css/classic.css"> 
+
+<!--    <link href="css/jquery.dataTables.css" rel="stylesheet" media="screen"/> -->
+   
+  <link href="css/custom.css" rel="stylesheet" media="screen"/>
+
+  
+  <!-- Application Stylesheets  -->
+  <link rel="stylesheet" href="css/style.css" ></link>
+
+  <!----------------- Scripts ----------------->
+  
+  <!-- Vendor Scripts  -->
+  <script src="js/libs/jquery-1.11.2.min.js"></script>
+  <script src="js/libs/jquery-ui.js"></script>
+  <script src="js/libs/date.js"></script>
+<!--   <script src="js/libs/jquery.mousewheel.min.js"></script> -->
+  <script src="js/libs/jQAllRangeSliders-min.js"></script>
+  <script src="js/libs/combobox.js"></script>
+  
+  <script src="js/libs/bootstrap-table.min.js"></script>
+  <script src="js/libs/bootstrap-table-resizable.min.js"></script>
+  <!-- <script src="https://rawgit.com/wenzhixin/colResizable/master/source/colResizable-1.5.source.js"></script> -->
+  
+  <script src="js/libs/bootstrap-table-reorder-columns.min.js"></script>
+  <!-- <script src="https://rawgit.com/akottr/dragtable/master/jquery.dragtable.js"></script> -->
+  
+    <script src="js/libs/jquery.dataTables.js"></script>
+  
+  
+  <!-- Highcharts Plugin Scripts  -->
+  <script src="js/libs/highcharts.js"></script>
+  
+  <!-- Reports Plugin -->
+  <script src="js/Reports.js"></script>
+  
+ <!-- Application Scripts  -->
+<script src="login.js"></script>
+<script src="individual_report.js"></script>
+ 
+  <script type="text/javascript">
+    $(function(){
+        $("#bottom-nav").load("header.html"); 
+     });
+  </script>
+</head>
+<body>
+<header>
+	<div id="top-nav">
+		<div id="logo"></div><div id="title">Attendance</div><div id="logout">Logout</div>
+	</div>
+</header>
+<div class="row">
+<div class="col-md-12 container attendance-reports">
+	<div class="row col-md-12" id="bottom-nav">
+	</div>
+	<div id="loading-mask">Loading..</div>
+	<div class="side-menu">
+	</div>
+	<div id="page-title">
+		Individual Report
+	</div>
+	<div class="contents">
+		<div class="options">
+			<button id="submit-btn" >Submit</button>
+			<button id="back-btn" onclick="cReports.util.mGoBack()">Back</button>
+		</div>
+	    <div id="reportForm">
+			<div class="form-field"><div class="label">Employee ID </div><div class="input-div"><input title="Employee ID"  type="text" placeholder="Emp ID" id="userId"/></div></div>
+			<div class="form-field"><div class="label">Employee Name </div><div class="input-div"><input title="Employee Name" type="text" placeholder="Emp Name" id="username"/></div></div>
+			<br/>
+			<div id="date-component">
+				<div id="range-label">Date Range</div>
+				<div class="form-field">
+					<div class="input-div">
+						<input title="From Date" 
+							   placeholder="From Date (dd MMM, yy)" 
+							   type="text" id="fromDate" 
+							   disabled="disabled" required/>
+					</div>
+					<div class="calendar-div">
+						<img src="image/calendar.png" 
+						     onclick="cApplication.mShowCalendar('fromDate')" 
+						     id="from-date-icon" />
+					</div>
+				</div>
+				<div class="date-range">
+					<div id="date-range-slider"></div>
+				</div>		
+				<div class="form-field">
+					<div class="input-div">
+						<input title="To Date" 
+						       placeholder="To Date (dd MMM, yy)" 
+						       type="text" id="toDate" 
+						       disabled="disabled" required/>
+					</div>
+					<div class="calendar-div">
+						<img src="image/calendar.png" 
+							 onclick="cApplication.mShowCalendar('toDate')" 
+							 id="from-date-icon" />
+					</div>
+				</div>
+			</div>	
+			<br/>
+			<div class="filters">
+				<div class="filter-widget ui-widget">
+				  <div class="label">Period</div>
+				  <select id="frequency-name">
+				  </select>
+				</div>
+				<div class="filter-widget ui-widget">
+				  <div id="refresh-btn" title="Refresh">
+				</div>
+			</div>
+			
+		</div>
+
+		
+	</div>
+			<div class="no-data">No data to display</div>
+		<div id="reports-data">
+			<div class="attendance-charts">
+				<div class="combo-charts" >
+					<!-- Stacked Charts -->
+					<div class="monthly-combo-charts individual-report" id="charts-div" >
+					</div>
+					<div id="summary-div" class="attendance-summary" ></div>
+				</div>
+				<div class="attendance-grid" id="grid-div"></div>
+				<!-- <div id="summary-div" class="attendance-summary" >
+					<table>
+						<tr>
+							<th colspan=3 style="font-decoration:underlined;text-align:center"><b>Summary</b></th>
+						</tr>
+						<tr>
+							<td colspan=3 style="font-decoration:underlined;text-align:left"><b>Name:   </b><span id="summary-name"></span></td>
+						</tr>
+						<tr>
+							<td colspan=3 style="font-decoration:underlined;text-align:left"><b>Period:   </b><span id="summary-period"></span></td>
+						</tr>
+						<tr>
+							<th>Std. working days</th><td id="actual-total-days"></td>
+						</tr>
+						<tr>
+							<th>Additional days of work</th><td id="actual-days-present">-</td>
+						</tr>
+						<tr>
+							<th>Vacation</th><td id="actual-vacation-days"></td>
+						</tr>
+						<tr>
+							<th>Effective Hours (Reqd)</th><td id="reqd-effective-hours"></td>
+						</tr>
+						<tr>
+							<th>Effective Hours (Actual)</th><td id="actual-effective-hours"></td>
+						</tr>
+						<tr>
+							<th id="avg-effective-freq-label">Avg Eff Hours (Reqd)</th><td id="reqd-effective-hours-cmp"></td>
+						</tr>
+						<tr>
+							<th id="avg-effective-freq-label">Avg Eff Hours (Actual)</th><td id="actual-effective-hours-cmp"></td>
+						</tr>
+						
+					</table>
+					<div class="summary-sparkline">
+						<div id="excess-sparkline" ></div>
+						<div id="shortage-sparkline"></div>
+					</div>
+				</div> -->
+<!-- 				<div id="summary-action"><button id="show-hide-summary-btn">Hide</button></div>
+				<button id="show-holidays">Show Holidays</button>
+				<div id="holiday-schedule" title="Holidays"></div>
+				 -->
+				
+			</div>
+<!-- 			<button id="show-entries">Show Pending Entries</button>
+				<div id="pending-entries" title="Pending Entries"></div>
+			<button id="show-table-btn">Show/Hide Table</button>
+			<div class="user-attendance attendance-details">
+			    <div class="attendance-block">
+					<div id="monthly-attendance"></div>
+				</div>
+			</div>
+			<div class="legend" id="grid-legend"></div> -->
+		</div>
+</div>
+</div>
+</div>
+</body>
+</html>

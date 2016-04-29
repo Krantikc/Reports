@@ -1,0 +1,18 @@
+{
+  "usersList": [{
+    "userId": "70008",
+    "name": "Sharmilla Myra Cordeiro",
+    "holidayId": 1,
+    "branch": "BANGALORE I"
+  }, {
+    "userId": "70070",
+    "name": "Swetha Shadakshari",
+    "holidayId": 1,
+    "branch": "BANGALORE I"
+  }, {
+    "userId": "70072",
+    "name": "KRANTI CHAVANNAVAR",
+    "holidayId": 1,
+    "branch": "BANGALORE I"
+  }]
+}
